@@ -3,9 +3,11 @@ package com.example.appteste
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 //import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 //import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 //import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,11 +33,11 @@ fun MyApp() {
     var counter by remember { mutableStateOf(0) }
 
     // Material Design surface container
-    Surface(modifier = Modifier.fillMaxSize() , color = MaterialTheme.colorScheme.inverseOnSurface) {
+    Surface(modifier = Modifier.fillMaxSize() , color = MaterialTheme.colorScheme.inverseSurface) {
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center)
         {
-            Text(text = "You have pressed the button this many times:")
+            Text(text = "Vezes que o botão foi pressionado")
             Text(text = "$counter", style = MaterialTheme.typography.titleLarge)
             Button(onClick = { counter++ }) {
                 Text("Somar 1")
