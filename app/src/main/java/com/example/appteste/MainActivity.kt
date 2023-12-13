@@ -81,7 +81,8 @@ fun NumberInputField() {
             // Aqui você pode incluir uma lógica para validar a entrada como numérica
             number = newValue.filter { it.isDigit() }
         },
-        label = { Text("Digite um número") }
+        label = { Text("Digite um número pfvr") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
 }
 
