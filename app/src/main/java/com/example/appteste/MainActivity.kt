@@ -27,6 +27,8 @@ import androidx.compose.runtime.*
 import androidx.compose.material.*
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
@@ -86,7 +88,7 @@ fun MyApp() {
                         { newValue ->
                             // Aqui você pode incluir uma lógica para validar a entrada como numérica
                             quantidade1 = newValue.filter { it.isDigit() }
-                            quantidade1num = quantidade1.toInt()
+                            quantidade1num = quantidade1.toIntOrNull() ?: 0 // Se a conversão falhar, use 0
                         },
                         label = { Text("Quantidade do 1º produto (unidades, gramas, litros, etc...)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -125,7 +127,7 @@ fun MyApp() {
                         { newValue ->
                             // Aqui você pode incluir uma lógica para validar a entrada como numérica
                             quantidade2 = newValue.filter { it.isDigit() }
-                            quantidade2num = quantidade2.toInt()
+                            quantidade2num = quantidade2.toIntOrNull() ?: 0 // Se a conversão falhar, use 0
                         },
                         label = { Text("Quantidade do 2º produto (unidades, gramas, litros, etc...)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -171,10 +173,13 @@ fun MyApp() {
                     }
                     //resultado = valor2.toString()
                 }) {
-                    Text("Calcular")
+                    Text(text = "Calcular",
+                        style = TextStyle(fontSize = 24.sp))
                 }
 
-                Text(text = resultado)
+                Text(text = resultado,
+                    style = TextStyle(fontSize = 24.sp),
+                    textAlign = TextAlign.Center)
             }
 
 
