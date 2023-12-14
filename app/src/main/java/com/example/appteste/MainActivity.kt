@@ -1,5 +1,6 @@
 package com.example.appteste
 
+import android.graphics.Paint.Align
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,34 +41,39 @@ fun MyApp() {
     var counter by remember { mutableStateOf(0) }
 
     // Material Design surface container
-    Surface(modifier = Modifier.fillMaxHeight() , color = MaterialTheme.colorScheme.inverseSurface) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center)
-        {
-            Text(text = "Vezes que o botão foi pressionado")
-            Text(text = "$counter", style = MaterialTheme.typography.titleLarge)
-            Button(onClick = { counter++ }) {
-                Text("Somar 1")
-            }
-            Button(onClick = { counter-- }) {
-                Text("Diminuir 1")
-            }
-        }
-    }
+    Surface(modifier = Modifier.fillMaxSize() , color = MaterialTheme.colorScheme.inverseSurface) {
 
-    Surface(modifier = Modifier.fillMaxWidth() , color = MaterialTheme.colorScheme.error) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center)
-        {
-            Text(text = "Vezes que o botão foi pressionado")
-            //Text(text = "$counter", style = MaterialTheme.typography.titleLarge)
-            NumberInputField()
-            Button(onClick = { counter++ }) {
-                Text("Somar 1")
+        Row (verticalAlignment = Alignment.CenterVertically){
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            )
+            {
+                Text(text = "Vezes que o botão foi pressionado")
+                Text(text = "$counter", style = MaterialTheme.typography.titleLarge)
+                Button(onClick = { counter++ }) {
+                    Text("Somar 1")
+                }
+                Button(onClick = { counter-- }) {
+                    Text("Diminuir 1")
+                }
             }
-            Button(onClick = { counter-- }) {
-                Text("Diminuir 1")
+
+            Column(//horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Center
+            )
+            {
+                Text(text = "Vezes que o botão foi pressionado")
+                //Text(text = "$counter", style = MaterialTheme.typography.titleLarge)
+                NumberInputField()
+                Button(onClick = { counter++ }) {
+                    Text("Somar 1")
+                }
+                Button(onClick = { counter-- }) {
+                    Text("Diminuir 1")
+                }
             }
+
         }
     }
 }
