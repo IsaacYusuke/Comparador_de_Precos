@@ -152,7 +152,7 @@ fun MyApp() {
             } // Final da 1ª Row
 
             Column(horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.weight(1f)){
+                modifier = Modifier.weight(2f)){
 
                 Text(text = resultado,
                     style = TextStyle(fontSize = 24.sp),
