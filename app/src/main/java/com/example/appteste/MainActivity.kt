@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -43,22 +44,22 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     // A variable that holds the state of the counter
-    var quantidade1 by remember { mutableStateOf("") }
-    var quantidade2 by remember { mutableStateOf("") }
-    var preço1 by remember { mutableStateOf("") }
-    var preço2 by remember { mutableStateOf("") }
+    var quantidade1 by rememberSaveable { mutableStateOf("") }
+    var quantidade2 by rememberSaveable { mutableStateOf("") }
+    var preço1 by rememberSaveable { mutableStateOf("") }
+    var preço2 by rememberSaveable { mutableStateOf("") }
 
-    var quantidade1num by remember { mutableStateOf(0) }
-    var quantidade2num by remember { mutableStateOf(0) }
-    var preço1num by remember { mutableStateOf(0.0) }
-    var preço2num by remember { mutableStateOf(0.0) }
+    var quantidade1num by rememberSaveable { mutableStateOf(0) }
+    var quantidade2num by rememberSaveable { mutableStateOf(0) }
+    var preço1num by rememberSaveable { mutableStateOf(0.0) }
+    var preço2num by rememberSaveable { mutableStateOf(0.0) }
 
-    var valor1 by remember { mutableStateOf(0.0) }
-    var valor2 by remember { mutableStateOf(0.0) }
+    var valor1 by rememberSaveable { mutableStateOf(0.0) }
+    var valor2 by rememberSaveable { mutableStateOf(0.0) }
 
 
-    var vantagem by remember { mutableStateOf(0.0)}
-    var resultado by remember { mutableStateOf("")}
+    var vantagem by rememberSaveable { mutableStateOf(0.0)}
+    var resultado by rememberSaveable { mutableStateOf("")}
 
     // Material Design surface container
     Surface(modifier = Modifier.fillMaxSize() , color = MaterialTheme.colorScheme.inverseSurface) {
@@ -193,7 +194,7 @@ fun MyApp() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NumberInputField() {
-    var number by remember { mutableStateOf("") }
+    var number by rememberSaveable { mutableStateOf("") }
 
     TextField(number,
         { newValue ->
