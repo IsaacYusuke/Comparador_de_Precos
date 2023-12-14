@@ -106,7 +106,7 @@ fun MyApp() {
                                 //preço1 = preço1
                             }
                         },
-                        label = { Text("Preço do 1º produto") },
+                        label = { Text("Preço do 1º produto (exemplo: 25.50)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
@@ -144,7 +144,7 @@ fun MyApp() {
                                 preço2num = 0.0
                             }
                         },
-                        label = { Text("Preço do 2º produto") },
+                        label = { Text("Preço do 2º produto (exemplo: 25.50)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 } // Final da 2ª Column interna
@@ -152,6 +152,10 @@ fun MyApp() {
 
             Column(horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.weight(1f)){
+
+                Text(text = resultado,
+                    style = TextStyle(fontSize = 24.sp),
+                    textAlign = TextAlign.Center)
 
                 Button(onClick = {
                     // Coloque aqui a lógica que será executada quando o botão for pressionado
@@ -177,9 +181,6 @@ fun MyApp() {
                         style = TextStyle(fontSize = 24.sp))
                 }
 
-                Text(text = resultado,
-                    style = TextStyle(fontSize = 24.sp),
-                    textAlign = TextAlign.Center)
             }
 
 
