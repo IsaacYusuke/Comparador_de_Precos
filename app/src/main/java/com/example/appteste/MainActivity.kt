@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -31,6 +33,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
+import kotlin.math.round
+import androidx.compose.material3.TextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -145,8 +153,14 @@ fun MyApp() {
                                 preço2num = 0.0
                             }
                         },
-                        label = { Text("Preço do 2º produto (exemplo: 25.50)") },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                        label = { Text(text = "Preço do 2º produto (exemplo: 25.50)") },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)/*,
+                        colors = TextFieldDefaults.textFieldColors(
+                            textColor = Color.Red, // Cor do texto
+                            containerColor= Color.Blue, // Cor do rótulo quando não está em foco
+                            focusedLabelColor = Color.Magenta // Cor do rótulo quando em foco
+                            // Você pode adicionar mais parâmetros para personalizar outras cores, como a linha de base
+                        )*/
                     )
                 } // Final da 2ª Column interna
             } // Final da 1ª Row
@@ -165,10 +179,10 @@ fun MyApp() {
                         valor2 = quantidade2num/preço2num
 
                         if(valor1 > valor2){
-                            vantagem = (100 * (valor1/valor2 - 1) )
+                            vantagem = round(100*(100 * (valor1/valor2 - 1) ))/100
                             resultado = "A opção 1 é $vantagem% melhor"
                         } else if(valor2 > valor1) {
-                            vantagem = (100 * (valor2/valor1 - 1) )
+                            vantagem = round(100*(100 * (valor2/valor1 - 1) ))/100
                             resultado = "A opção 2 é $vantagem% melhor"
                         } else {
                             resultado = "Os dois são equivalentes"
@@ -179,6 +193,21 @@ fun MyApp() {
                     //resultado = valor2.toString()
                 }) {
                     Text(text = "Calcular",
+                        style = TextStyle(fontSize = 24.sp))
+                }
+
+                Spacer(modifier = Modifier.height(16.dp)) // Adiciona espaço entre os botões
+
+                Button(onClick = {
+                    preço1 = ""
+                    preço2 = ""
+                    quantidade1 = ""
+                    quantidade2 = ""
+                    resultado = ""
+                },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red) // Define a cor do botão para vermelho
+                ) {
+                    Text(text = "Reset",
                         style = TextStyle(fontSize = 24.sp))
                 }
 
@@ -211,7 +240,8 @@ fun CenteredText(txt: String) {
     Text(
         text = txt,
         modifier = Modifier.fillMaxWidth(), // Ocupa toda a largura do contêiner pai
-        textAlign = TextAlign.Center // Centraliza o texto horizontalmente
+        textAlign = TextAlign.Center, // Centraliza o texto horizontalmente
+        fontSize =30.sp // Define o tamanho da fonte para 100sp
     )
 }
 
