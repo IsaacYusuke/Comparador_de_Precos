@@ -103,6 +103,8 @@ fun MyApp() {
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
 
+                    Spacer(modifier = Modifier.height(16.dp))
+
                     TextField(
                         value = preço1,
                         onValueChange = { newValue ->
@@ -141,6 +143,8 @@ fun MyApp() {
                         label = { Text("Quantidade do 2º produto (unidades, gramas, litros, etc...)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
+
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     TextField(
                         value = preço2,
