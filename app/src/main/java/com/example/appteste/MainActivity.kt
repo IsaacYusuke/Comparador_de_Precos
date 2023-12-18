@@ -79,7 +79,7 @@ fun MyApp() {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
-                                    .weight(2f)
+                                    .weight(1f)
             ) {
 
                 Column(
@@ -170,7 +170,7 @@ fun MyApp() {
             } // Final da 1ª Row
 
             Column(horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.weight(2f)){
+                modifier = Modifier.weight(1f)){
 
                 Text(text = resultado,
                     style = TextStyle(fontSize = 24.sp),
@@ -205,6 +205,8 @@ fun MyApp() {
                 Button(onClick = {
                     preço1 = ""
                     preço2 = ""
+                    preço1num = 0.0
+                    preço2num = 0.0
                     quantidade1 = ""
                     quantidade2 = ""
                     resultado = ""
