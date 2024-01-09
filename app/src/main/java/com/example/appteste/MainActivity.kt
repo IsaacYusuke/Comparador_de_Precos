@@ -96,8 +96,8 @@ fun MyApp() {
                     //Text(text = "$counter", style = MaterialTheme.typography.titleLarge)
 
                     TextField(
-                        quantidade1,
-                        { newValue ->
+                        value = quantidade1,
+                        onValueChange = { newValue ->
                             quantidade1 = newValue
                             try {
                                 quantidade1num = newValue.toDouble() // Tenta converter para Double
@@ -151,8 +151,8 @@ fun MyApp() {
                     //Text(text = "$counter", style = MaterialTheme.typography.titleLarge)
 
                     TextField(
-                        quantidade2,
-                        { newValue ->
+                        value = quantidade2,
+                        onValueChange = { newValue ->
                             // Aqui você pode incluir uma lógica para validar a entrada como numérica
                             quantidade2 = newValue
                             try {
