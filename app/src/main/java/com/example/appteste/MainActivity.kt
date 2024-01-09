@@ -54,17 +54,20 @@ fun MyApp() {
     // A variable that holds the state of the counter
     var quantidade1 by rememberSaveable { mutableStateOf("") }
     var quantidade2 by rememberSaveable { mutableStateOf("") }
-    var preço1 by rememberSaveable { mutableStateOf("") }
-    var preço2 by rememberSaveable { mutableStateOf("") }
+    var preco1 by rememberSaveable { mutableStateOf("") }
+    var preco2 by rememberSaveable { mutableStateOf("") }
 
-    var quantidade1num by rememberSaveable { mutableStateOf(0) }
-    var quantidade2num by rememberSaveable { mutableStateOf(0) }
-    var preço1num by rememberSaveable { mutableStateOf(0.0) }
-    var preço2num by rememberSaveable { mutableStateOf(0.0) }
+    var quantidade1num by rememberSaveable { mutableStateOf(0.0) }
+    var quantidade2num by rememberSaveable { mutableStateOf(0.0) }
+    var preco1num by rememberSaveable { mutableStateOf(0.0) }
+    var preco2num by rememberSaveable { mutableStateOf(0.0) }
 
     var valor1 by rememberSaveable { mutableStateOf(0.0) }
     var valor2 by rememberSaveable { mutableStateOf(0.0) }
-
+    var precoporqtd1 by rememberSaveable { mutableStateOf("") }
+    var precoporqtd2 by rememberSaveable { mutableStateOf("") }
+    var precoporqtd1num by rememberSaveable { mutableStateOf(0.0) }
+    var precoporqtd2num by rememberSaveable { mutableStateOf(0.0) }
 
     var vantagem by rememberSaveable { mutableStateOf(0.0)}
     var resultado by rememberSaveable { mutableStateOf("")}
@@ -95,9 +98,13 @@ fun MyApp() {
                     TextField(
                         quantidade1,
                         { newValue ->
-                            // Aqui você pode incluir uma lógica para validar a entrada como numérica
-                            quantidade1 = newValue.filter { it.isDigit() }
-                            quantidade1num = quantidade1.toIntOrNull() ?: 0 // Se a conversão falhar, use 0
+                            quantidade1 = newValue
+                            try {
+                                quantidade1num = newValue.toDouble() // Tenta converter para Double
+                            } catch (e: NumberFormatException) {
+                                // Se a conversão falhar, lide com a excecão (p.ex. não faca nada ou defina preco2num como 0.0)
+                                quantidade1num = 0.0
+                            }
                         },
                         label = { Text("Quantidade do 1º produto (unidades, gramas, litros, etc...)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -106,21 +113,31 @@ fun MyApp() {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     TextField(
-                        value = preço1,
+                        value = preco1,
                         onValueChange = { newValue ->
-                            preço1 = newValue
+                            preco1 = newValue
                             try {
-                                preço1num = newValue.toDouble() // Tenta converter para Double
+                                preco1num = newValue.toDouble() // Tenta converter para Double
                             } catch (e: NumberFormatException) {
-                                // Se a conversão falhar, lide com a exceção (p.ex. não faça nada ou defina preço2num como 0.0)
-                                preço1num = 0.0
-                                //preço1 = preço1
+                                // Se a conversão falhar, lide com a excecão (p.ex. não faca nada ou defina preco2num como 0.0)
+                                preco1num = 0.0
+                                //preco1 = preco1
                             }
                         },
-                        label = { Text("Preço do 1º produto (exemplo: 25.50)") },
+                        label = { Text("Preco do 1º produto (exemplo: 25.50)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
-                }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = "Preco/Quantidade: $precoporqtd1",
+                        modifier = Modifier.fillMaxWidth(), // Ocupa toda a largura do contêiner pai
+                        textAlign = TextAlign.Center, // Centraliza o texto horizontalmente
+                        fontSize =20.sp // Define o tamanho da fonte para 100sp
+                    )
+
+                } // Final da Column da esquerda
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -137,8 +154,13 @@ fun MyApp() {
                         quantidade2,
                         { newValue ->
                             // Aqui você pode incluir uma lógica para validar a entrada como numérica
-                            quantidade2 = newValue.filter { it.isDigit() }
-                            quantidade2num = quantidade2.toIntOrNull() ?: 0 // Se a conversão falhar, use 0
+                            quantidade2 = newValue
+                            try {
+                                quantidade2num = newValue.toDouble() // Tenta converter para Double
+                            } catch (e: NumberFormatException) {
+                                // Se a conversão falhar, lide com a excecão (p.ex. não faca nada ou defina preco2num como 0.0)
+                                quantidade2num = 0.0
+                            }
                         },
                         label = { Text("Quantidade do 2º produto (unidades, gramas, litros, etc...)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -147,17 +169,17 @@ fun MyApp() {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     TextField(
-                        value = preço2,
+                        value = preco2,
                         onValueChange = { newValue ->
-                            preço2 = newValue
+                            preco2 = newValue
                             try {
-                                preço2num = newValue.toDouble() // Tenta converter para Double
+                                preco2num = newValue.toDouble() // Tenta converter para Double
                             } catch (e: NumberFormatException) {
-                                // Se a conversão falhar, lide com a exceção (p.ex. não faça nada ou defina preço2num como 0.0)
-                                preço2num = 0.0
+                                // Se a conversão falhar, lide com a excecão (p.ex. não faca nada ou defina preco2num como 0.0)
+                                preco2num = 0.0
                             }
                         },
-                        label = { Text(text = "Preço do 2º produto (exemplo: 25.50)") },
+                        label = { Text(text = "Preco do 2º produto (exemplo: 25.50)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)/*,
                         colors = TextFieldDefaults.textFieldColors(
                             textColor = Color.Red, // Cor do texto
@@ -166,8 +188,20 @@ fun MyApp() {
                             // Você pode adicionar mais parâmetros para personalizar outras cores, como a linha de base
                         )*/
                     )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = "Preco/Quantidade: $precoporqtd2",
+                        modifier = Modifier.fillMaxWidth(), // Ocupa toda a largura do contêiner pai
+                        textAlign = TextAlign.Center, // Centraliza o texto horizontalmente
+                        fontSize =20.sp // Define o tamanho da fonte para 100sp
+                    )
+
                 } // Final da 2ª Column interna
             } // Final da 1ª Row
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Column(horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.weight(1f)){
@@ -178,21 +212,32 @@ fun MyApp() {
 
                 Button(onClick = {
                     // Coloque aqui a lógica que será executada quando o botão for pressionado
-                    if (preço2num != 0.0 && preço1num != 0.0) {
-                        valor1 = quantidade1num/preço1num
-                        valor2 = quantidade2num/preço2num
+                    if (preco2num != 0.0 && preco1num != 0.0 && quantidade1num != 0.0 && quantidade2num != 0.0) {
+                        valor1 = quantidade1num/preco1num
+                        valor2 = quantidade2num/preco2num
+
+                        precoporqtd1num = preco1num / quantidade1num
+                        precoporqtd1num = round(precoporqtd1num*100)/100
+
+                        precoporqtd2num = preco2num / quantidade2num
+                        precoporqtd2num = round(precoporqtd2num*100)/100
+
+                        precoporqtd1 = "R$ " + precoporqtd1num.toString()
+                        precoporqtd2 = "R$ " + precoporqtd2num.toString()
+
+
 
                         if(valor1 > valor2){
                             vantagem = round(100*(100 * (valor1/valor2 - 1) ))/100
-                            resultado = "A opção 1 é $vantagem% melhor"
+                            resultado = "A opcão 1 é $vantagem% melhor"
                         } else if(valor2 > valor1) {
                             vantagem = round(100*(100 * (valor2/valor1 - 1) ))/100
-                            resultado = "A opção 2 é $vantagem% melhor"
+                            resultado = "A opcão 2 é $vantagem% melhor"
                         } else {
                             resultado = "Os dois são equivalentes"
                         }
                     } else{
-                        resultado = "Digite os preços dos produtos"
+                        resultado = "Digite os precos dos produtos"
                     }
                     //resultado = valor2.toString()
                 }) {
@@ -200,16 +245,19 @@ fun MyApp() {
                         style = TextStyle(fontSize = 24.sp))
                 }
 
-                Spacer(modifier = Modifier.height(16.dp)) // Adiciona espaço entre os botões
+                Spacer(modifier = Modifier.height(16.dp)) // Adiciona espaco entre os botões
 
                 Button(onClick = {
-                    preço1 = ""
-                    preço2 = ""
-                    preço1num = 0.0
-                    preço2num = 0.0
+                    preco1 = ""
+                    preco2 = ""
+                    preco1num = 0.0
+                    preco2num = 0.0
                     quantidade1 = ""
                     quantidade2 = ""
                     resultado = ""
+                    precoporqtd1 = ""
+                    precoporqtd2 = ""
+
                 },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red) // Define a cor do botão para vermelho
                 ) {
@@ -224,7 +272,7 @@ fun MyApp() {
 
         } // Final da Column externa
     } // Final da Surface
-} // Final da função MyApp
+} // Final da funcão MyApp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
